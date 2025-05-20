@@ -1,6 +1,6 @@
 console.log("Awilix ...");
 
-import awilix from 'awilix';
+const awilix = require('awilix');
 const Lifetime = awilix.Lifetime
 const Books = require('./books');
 const DisplayBooks = require('./displayBooks');

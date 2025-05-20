@@ -1,15 +1,21 @@
 const {container,setup} = require('./awilix-setup');
 console.log("Runing Awilix Setup ..");
 setup();
+const books = container.resolve('books')
 
 class Library {
     static allBooks = [];
 
     constructor({books}) {
-        this.book = new books('Nestjs','Kamil Myśliwiec', 101)
+        // this.book = new books('Nestjs','Kamil Myśliwiec', 101)
+        this.book = books;
     }
 
-    addBook(tile,author,bookNo) {
+    getBook(){
+        console.log('books: ',this.book.getDetails());
+    }
+
+    addBook() {
         Library.allBooks.push(this.book);
     }
 
@@ -35,5 +41,5 @@ class Library {
 
 
 const library = new Library();
-console.log("All Books: ", library.allBooks);
+library.getBook();
 // library.addBook('Nestjs','Kamil Myśliwiec', 101)

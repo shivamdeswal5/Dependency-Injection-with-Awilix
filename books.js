@@ -1,3 +1,6 @@
+const {container,setup} = require('./awilix-setup');
+const books = container.resolve('books');
+
 class Books {
     constructor(title,author,bookNo) {
         this.title = title;
@@ -23,7 +26,7 @@ class Books {
     }
 }
 
-// let book1 = new Books('Nestjs','Kamil Myśliwiec', 101);
-// book1.getDetails();
+let book1 = new Books('Nestjs','Kamil Myśliwiec', 101);
+book1.getDetails();
 
 module.exports = Books;
