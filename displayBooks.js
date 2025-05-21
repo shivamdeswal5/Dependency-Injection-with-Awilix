@@ -1,15 +1,16 @@
-class DisplayBooks{
-
+class DisplayBooks {
     displayAvailableBooks(books) {
-        const availableBooks =  books.filter(book => book.isAvailable);
-        console.log("Available books: ",availableBooks);
-        return availableBooks;
+        const available = books.filter(book => book.isAvailable);
+        console.log("\nAvailable Books:");
+        available.forEach(book => book.getDetails());
+        return available;
     }
 
     displayBorrowedBooks(books) {
-        const borrowedBooks =  books.filter(book => !book.isAvailable);
-        console.log("Borrowed Books: ");
-        return borrowedBooks;
+        const borrowed = books.filter(book => !book.isAvailable);
+        console.log("\nBorrowed Books:");
+        borrowed.forEach(book => book.getDetails());
+        return borrowed;
     }
 }
 

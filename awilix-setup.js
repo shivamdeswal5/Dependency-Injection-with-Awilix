@@ -1,24 +1,17 @@
-console.log("Awilix ...");
-
 const awilix = require('awilix');
-const Lifetime = awilix.Lifetime
-const Books = require('./books');
 const DisplayBooks = require('./displayBooks');
+const Library = require('./library');
 
 const container = awilix.createContainer({
-  injectionMode: awilix.InjectionMode.PROXY,
-  strict: true,
-})
+    injectionMode: awilix.InjectionMode.PROXY,
+    strict: true,
+});
 
-function setup(){
-  container.register({
-    books: awilix.asClass(Books,{ lifetime: Lifetime.SINGLETON }),
-    displayBooks: awilix.asClass(DisplayBooks,{ lifetime: Lifetime.SINGLETON })
-
-  })
+function setup() {
+    container.register({
+        displayBooks: awilix.asClass(DisplayBooks, { lifetime: awilix.Lifetime.SINGLETON }),
+        library: awilix.asClass(Library, { lifetime: awilix.Lifetime.SINGLETON }),
+    });
 }
 
-module.exports = {
-  container,
-  setup,
-}
+module.exports = { container, setup };

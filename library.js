@@ -1,45 +1,46 @@
-const {container,setup} = require('./awilix-setup');
-console.log("Runing Awilix Setup ..");
-setup();
-const books = container.resolve('books')
+const Books = require('./books');
 
 class Library {
-    static allBooks = [];
-
-    constructor({books}) {
-        // this.book = new books('Nestjs','Kamil Myśliwiec', 101)
-        this.book = books;
+    constructor({ displayBooks }) {
+        this.books = [];
+        this.displayBooks = displayBooks;
     }
 
-    getBook(){
-        console.log('books: ',this.book.getDetails());
+    addBook(title, author, bookNo) {
+        const book = new Books(title, author, bookNo);
+        this.books.push(book);
     }
 
-    addBook() {
-        Library.allBooks.push(this.book);
+    getBookDetails() {
+        console.log("\nAll Books:");
+        this.books.forEach(book => book.getDetails());
     }
 
-    findBook(bookNo) {
-        const book =  this.books.find(book => book.bookNo === bookNo);
-        if(book){
-            console.log("Found ",book);
-            return book;
-        }else{
-            console.log("No Book found");
-            return;
+    borrowBook(bookNo) {
+        const book = this.books.find(b => b.bookNo === bookNo);
+        if (book) {
+            book.borrowBook();
+        } else {
+            console.log(`Book with number ${bookNo} not found.`);
         }
     }
-    
-    deleteBook(bookNo){
-        const book =  this.books.filter(book => book.bookNo == bookNo);
-        console.log("Books to be deleted ",book);
-        books.splice(books.findIndex(book => book.bookNo === bookNo) , 1)
-        
+
+    returnBook(bookNo) {
+        const book = this.books.find(b => b.bookNo === bookNo);
+        if (book) {
+            book.returnBook();
+        } else {
+            console.log(`Book with number ${bookNo} not found.`);
+        }
     }
-   
+
+    showAvailableBooks() {
+        this.displayBooks.displayAvailableBooks(this.books);
+    }
+
+    showBorrowedBooks() {
+        this.displayBooks.displayBorrowedBooks(this.books);
+    }
 }
 
-
-const library = new Library();
-library.getBook();
-// library.addBook('Nestjs','Kamil Myśliwiec', 101)
+module.exports = Library;
